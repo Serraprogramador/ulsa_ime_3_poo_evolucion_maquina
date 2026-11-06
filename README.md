@@ -8,17 +8,16 @@ Llena cada espacio conforme avances en las fases de [PRACTICA.md](PRACTICA.md).
 
 **1.1 El problema con mis propias palabras**
 
-[Inserta aquí tu respuesta]
+El problema consiste en desarrollar un programa que permita controlar diferentes máquinas de una planta de manufactura. Cada máquina debe procesar piezas, registrar su tiempo de trabajo y llevar un control de su producción. El objetivo es mejorar la clase Maquina para evitar errores y lograr que todas las máquinas trabajen correctamente mediante la programación orientada a objetos.
 
 **1.2 Reglas que siempre deben cumplirse en una máquina** (escribe al menos tres)
-
-1. _____
-2. _____
-3. _____
+1. El nombre de la máquina no debe estar vacío.
+2. La cantidad de piezas procesadas nunca debe ser negativa.
+3. El tiempo trabajado y el tiempo de cada ciclo deben ser valores válidos y no negativos; el tiempo de ciclo debe ser mayor que cero.
 
 **1.3 ¿Quién más usa la clase `Maquina`? ¿Qué podría salir mal si otro equipo crea una máquina nueva sin conocer tus reglas?**
 
-[Inserta aquí tu respuesta]
+La clase Maquina es utilizada por todas las clases derivadas, como Torno y Fresadora, además de la clase ControlDeLinea. Si otro equipo crea una máquina sin conocer las reglas, podría modificar incorrectamente los datos, registrar mal las piezas o calcular tiempos incorrectos, provocando errores en los reportes de producción.
 
 ## Fase 2. Diseñar la solución
 
@@ -49,49 +48,48 @@ Llena cada espacio conforme avances en las fases de [PRACTICA.md](PRACTICA.md).
 
 a) ¿Qué imprime `ejecutarTurno()` para el torno y la fresadora? ¿Por qué no imprime "torneando" ni "fresando"?
 
-[Inserta aquí tu respuesta]
-
+Imprime "procesamiento generico" para ambas máquinas porque el método procesar() no es virtual. Por eso se ejecuta el método de la clase base Maquina y no el de las clases derivadas.
 b) ¿Por qué el torno acumula 65 s y no 135 s?
 
-[Inserta aquí tu respuesta]
+Porque al llamar directamente al torno suma 45 segundos, pero dentro de ejecutarTurno() realiza dos ciclos genéricos de 10 segundos cada uno. Por eso acumula 65 segundos en total.
 
 **3.1 Etapa 1. Invariantes y constructores explicit**
 
 a) ¿Qué regla de la sección 1.2 rompió `torno.piezasProcesadas = -5;`?
 
-[Inserta aquí tu respuesta]
+Porque así se evita que otras clases modifiquen directamente los datos y provoquen errores en el funcionamiento de las máquinas.
 
 b) ¿De dónde salió la máquina "Fantasma"? ¿Qué hizo el compilador sin que se lo pidieras?
 
-[Inserta aquí tu respuesta]
+Permiten que las clases derivadas registren piezas y agreguen tiempo de trabajo sin acceder directamente a los atributos privados.
 
 c) ¿Qué tuviste que cambiar en `Torno` y `Fresadora` y por qué?
 
-[Inserta aquí tu respuesta]
+Permiten consultar la información de una máquina de forma segura, sin modificar sus valores.
 
 **3.2 Etapa 2. Virtual y override**
 
 a) La fresadora acumula 180 s, pero reporta 360 pzas/h. ¿Por qué un cálculo usó 60 s y el otro 10 s?
 
-[Inserta aquí tu respuesta]
+Porque el procesamiento de la fresadora utiliza ciclos de 60 segundos, mientras que el cálculo de capacidad todavía utiliza los 10 segundos definidos en la clase base Maquina. Esto provoca que los tiempos no coincidan.
 
 b) ¿Tu compilador mostró alguna advertencia antes de usar `override`? ¿Qué mensaje dio después de agregar `override`?
 
-[Inserta aquí tu respuesta]
+Antes de utilizar override, el compilador podía aceptar una declaración incorrecta sin detectar que no se estaba sobrescribiendo el método esperado. Al agregar override, si la firma no coincide, el compilador muestra un error indicando que el método no sobrescribe ninguna función de la clase base.
 
 **3.3 Etapa 3. La línea de producción**
 
 a) ¿Por qué la línea procesó todo como "generico" si `procesar()` ya es virtual?
 
-[Inserta aquí tu respuesta]
+Porque se utilizaron objetos de tipo Maquina almacenados por valor en un vector. Esto provocó que se perdiera la información específica de las clases derivadas, por lo que se ejecutó el comportamiento de la clase base.
 
 b) ¿Por qué el torno y la fresadora originales quedaron con 0 piezas?
 
-[Inserta aquí tu respuesta]
+Porque la línea trabajó con copias de los objetos originales. Los cambios realizados durante el procesamiento afectaron únicamente a las copias almacenadas en el vector, no a las máquinas originales.
 
 c) La relación entre `ControlDeLinea` y `Maquina`, ¿es composición o agregación? ¿Por qué?
 
-[Inserta aquí tu respuesta]
+Es agregación porque ControlDeLinea utiliza máquinas que fueron creadas fuera de la clase. Las máquinas pueden existir independientemente y no dependen de ControlDeLinea para su creación o destrucción.
 
 **3.4 Etapa 4. Destructores**
 

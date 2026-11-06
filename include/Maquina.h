@@ -4,15 +4,28 @@
 #include <string>
 
 class Maquina {
-public:
+private:
     std::string nombre;
     int piezasProcesadas;
     int tiempoTrabajadoSeg;
 
-    Maquina(const std::string& nombre);
+protected:
+    void registrarPieza();
+    void agregarTiempo(int segundos);
 
-    void procesar();
+public:
+    explicit Maquina(const std::string& nombre);
+
+    virtual void procesar();
+    virtual int tiempoCicloSeg() const;
+
+    double capacidadPorHora() const;
+
     void mostrarEstado() const;
+
+    std::string getNombre() const;
+    int getPiezasProcesadas() const;
+    int getTiempoTrabajadoSeg() const;
 };
 
 #endif
