@@ -120,15 +120,15 @@ Porque el compilador evita que se creen máquinas incompletas o sin un comportam
 
 a) ¿Qué partes del contrato violó `InspeccionVisual`?
 
-[Inserta aquí tu respuesta]
+No registró las piezas procesadas ni agregó el tiempo trabajado. Además, su método tiempoCicloSeg() devuelve 0, cuando el contrato establece que debe ser mayor que cero.
 
 b) ¿Por qué el compilador no lo detectó?
 
-[Inserta aquí tu respuesta]
+Porque el compilador verifica que los métodos tengan los nombres, parámetros y tipos correctos, pero no puede comprobar si cumplen las reglas establecidas en los comentarios.
 
 c) ¿Qué pasaría si el próximo equipo tampoco lee el comentario del contrato?
 
-[Inserta aquí tu respuesta]
+Podría cometer los mismos errores, porque cada clase derivada es responsable de cumplir el contrato y el compilador no garantiza que lo haga.
 
 **3.7 Etapa 7. La base hace cumplir el contrato**
 
