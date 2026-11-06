@@ -1,8 +1,11 @@
-#ifndef CONTROLDELINEA_H
-#define CONTROLDELINEA_H
+#ifndef CONTROL_DE_LINEA_H
+#define CONTROL_DE_LINEA_H
+
+#include <vector>
 
 #include "Maquina.h"
-#include <vector>
+
+namespace planta {
 
 class ControlDeLinea {
 private:
@@ -10,8 +13,12 @@ private:
 
 public:
     bool agregar(Maquina* maquina);
+
     void ejecutarTurno(int ciclos);
+
     void imprimirReporte() const;
 };
+
+} // namespace planta
 
 #endif

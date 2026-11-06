@@ -3,6 +3,8 @@
 
 #include <string>
 
+namespace planta {
+
 // Clase base abstracta de todas las maquinas de la planta.
 //
 // CONTRATO para toda clase derivada:
@@ -13,9 +15,7 @@
 // La base registra las piezas y el tiempo de cada ciclo.
 
 class Maquina {
-
 private:
-
     std::string nombre;
     int piezasProcesadas;
     int tiempoTrabajadoSeg;
@@ -24,18 +24,12 @@ private:
     void agregarTiempo(int segundos);
     int tiempoCicloValidado() const;
 
-    // Lo que cada maquina hace en un ciclo.
-    // Solo la clase base lo llama.
     virtual void ejecutarCiclo() = 0;
 
 public:
-
     explicit Maquina(const std::string& nombre);
-
     virtual ~Maquina() = default;
 
-    // Procesa exactamente una pieza.
-    // No es virtual: ninguna derivada puede cambiar las reglas.
     void procesar();
 
     virtual int tiempoCicloSeg() const = 0;
@@ -43,13 +37,12 @@ public:
     double capacidadPorHora() const;
 
     const std::string& getNombre() const;
-
     int getPiezasProcesadas() const;
-
     int getTiempoTrabajadoSeg() const;
 
     void mostrarEstado() const;
-
 };
+
+} // namespace planta
 
 #endif

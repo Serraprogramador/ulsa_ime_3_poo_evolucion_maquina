@@ -1,10 +1,13 @@
 #include "Maquina.h"
-
 #include <cstdio>
 #include <stdexcept>
 
+namespace planta {
+
 Maquina::Maquina(const std::string& nombre)
-    : nombre(nombre), piezasProcesadas(0), tiempoTrabajadoSeg(0) {}
+    : nombre(nombre),
+      piezasProcesadas(0),
+      tiempoTrabajadoSeg(0) {}
 
 void Maquina::registrarPieza() {
     piezasProcesadas++;
@@ -58,3 +61,5 @@ void Maquina::mostrarEstado() const {
            tiempoTrabajadoSeg,
            capacidadPorHora());
 }
+
+} // namespace planta

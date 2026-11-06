@@ -1,5 +1,8 @@
 #include "ControlDeLinea.h"
 #include <cstdio>
+#include <stdexcept>
+
+namespace planta {
 
 bool ControlDeLinea::agregar(Maquina* maquina) {
     if (maquina == nullptr) {
@@ -11,27 +14,30 @@ bool ControlDeLinea::agregar(Maquina* maquina) {
 }
 
 void ControlDeLinea::ejecutarTurno(int ciclos) {
-    for (Maquina* m : maquinas) {
-        for (int i = 0; i < ciclos; i++) {
-            m->procesar();
+    if (ciclos <= 0) {
+        throw std::invalid_argument(
+            "La cantidad de ciclos debe ser mayor que cero"
+        );
+    }
+
+    for (int i = 0; i < ciclos; i++) {
+        for (Maquina* maquina : maquinas) {
+            maquina->procesar();
         }
     }
 }
 
 void ControlDeLinea::imprimirReporte() const {
-    if (maquinas.empty()) {
-        printf("La linea no tiene maquinas\n");
-        return;
-    }
-
     printf("\n--- Reporte de la linea ---\n");
 
     int totalPiezas = 0;
 
-    for (const Maquina* m : maquinas) {
-        m->mostrarEstado();
-        totalPiezas += m->getPiezasProcesadas();
+    for (const Maquina* maquina : maquinas) {
+        maquina->mostrarEstado();
+        totalPiezas += maquina->getPiezasProcesadas();
     }
 
     printf("Total de piezas procesadas: %d\n", totalPiezas);
 }
+
+} // namespace planta

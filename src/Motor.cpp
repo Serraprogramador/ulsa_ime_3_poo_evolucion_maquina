@@ -1,29 +1,18 @@
 #include "Motor.h"
-#include <cstdio>
-#include <stdexcept>
+#include <algorithm>
 
-Motor::Motor(double velocidadMaxRpm) {
-    if (velocidadMaxRpm <= 0) {
-        throw std::invalid_argument(
-            "La velocidad maxima debe ser positiva"
-        );
-    }
+namespace planta {
 
-    this->velocidadMaxRpm = velocidadMaxRpm;
-    velocidadActualRpm = 0;
-}
+Motor::Motor(double velocidadMaxima)
+    : velocidad(0.0),
+      velocidadMaxima(velocidadMaxima) {}
 
-
-void Motor::fijarVelocidad(double rpm) {
-    if (rpm < 0) {
-        velocidadActualRpm = 0;
-    } else if (rpm > velocidadMaxRpm) {
-        velocidadActualRpm = velocidadMaxRpm;
-    } else {
-        velocidadActualRpm = rpm;
-    }
+void Motor::fijarVelocidad(double nuevaVelocidad) {
+    velocidad = std::clamp(nuevaVelocidad, 0.0, velocidadMaxima);
 }
 
 double Motor::getVelocidad() const {
-    return velocidadActualRpm;
+    return velocidad;
 }
+
+} // namespace planta
