@@ -4,11 +4,17 @@
 #include "Maquina.h"
 
 class InspeccionVisual : public Maquina {
+
+private:
+
+    void ejecutarCiclo() override;
+
 public:
+
     explicit InspeccionVisual(const std::string& nombre);
 
-    void procesar() override;
     int tiempoCicloSeg() const override;
+
 };
 
 #endif

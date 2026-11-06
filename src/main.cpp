@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <exception>
 
 #include "ControlDeLinea.h"
 #include "Torno.h"
@@ -7,31 +8,28 @@
 #include "InspeccionVisual.h"
 
 int main() {
+    try {
+        Torno torno("Torno T-01");
+        Fresadora fresadora("Fresadora F-01");
+        Pulidora pulidora("Pulidora P-01");
+        InspeccionVisual inspeccion("Inspeccion I-01");
 
-    // Crear las maquinas
-    Torno torno("Torno T-01");
-    Fresadora fresadora("Fresadora F-01");
-    Pulidora pulidora("Pulidora P-01");
-    InspeccionVisual inspeccion("Inspeccion I-01");
+        ControlDeLinea linea;
 
-    // Crear la linea de produccion
-    ControlDeLinea linea;
+        linea.agregar(&torno);
+        linea.agregar(&fresadora);
+        linea.agregar(&pulidora);
+        linea.agregar(&inspeccion);
 
-    // Agregar las maquinas a la linea
-    linea.agregar(&torno);
-    linea.agregar(&fresadora);
-    linea.agregar(&pulidora);
-    linea.agregar(&inspeccion);
+        printf("--- Ejecutando linea de produccion ---\n");
 
-    // Ejecutar el turno
-    printf("--- Ejecutando linea de produccion ---\n");
-
-    linea.ejecutarTurno(2);
-
-    // Mostrar reporte
-    printf("\n--- Reporte de la linea ---\n");
-
-    linea.imprimirReporte();
+        linea.ejecutarTurno(2);
+        linea.imprimirReporte();
+    }
+    catch (const std::exception& e) {
+        printf("Error: %s\n", e.what());
+        return 1;
+    }
 
     return 0;
 }

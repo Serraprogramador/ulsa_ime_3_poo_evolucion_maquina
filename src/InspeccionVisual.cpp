@@ -4,12 +4,9 @@
 InspeccionVisual::InspeccionVisual(const std::string& nombre)
     : Maquina(nombre) {}
 
-void InspeccionVisual::procesar() {
+void InspeccionVisual::ejecutarCiclo() {
     printf("%s: inspeccionando pieza con camara\n",
            getNombre().c_str());
-
-    registrarPieza();
-    agregarTiempo(tiempoCicloSeg());
 }
 
 int InspeccionVisual::tiempoCicloSeg() const {

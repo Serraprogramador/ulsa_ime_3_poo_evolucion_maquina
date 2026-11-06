@@ -2,14 +2,10 @@
 #include <cstdio>
 
 Fresadora::Fresadora(const std::string& nombre)
-    : Maquina(nombre) {
-}
+    : Maquina(nombre) {}
 
-void Fresadora::procesar() {
+void Fresadora::ejecutarCiclo() {
     printf("%s: fresando pieza\n", getNombre().c_str());
-
-    registrarPieza();
-    agregarTiempo(tiempoCicloSeg());
 }
 
 int Fresadora::tiempoCicloSeg() const {

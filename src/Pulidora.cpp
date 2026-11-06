@@ -2,14 +2,10 @@
 #include <cstdio>
 
 Pulidora::Pulidora(const std::string& nombre)
-    : Maquina(nombre) {
-}
+    : Maquina(nombre) {}
 
-void Pulidora::procesar() {
+void Pulidora::ejecutarCiclo() {
     printf("%s: puliendo pieza\n", getNombre().c_str());
-
-    registrarPieza();
-    agregarTiempo(tiempoCicloSeg());
 }
 
 int Pulidora::tiempoCicloSeg() const {
