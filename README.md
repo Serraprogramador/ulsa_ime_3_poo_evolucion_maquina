@@ -134,15 +134,18 @@ Podría cometer los mismos errores, porque cada clase derivada es responsable de
 
 a) ¿Cómo puede una clase derivada sobrescribir un método que es privado en la base?
 
-[Inserta aquí tu respuesta]
+Porque la palabra private impide acceder directamente al método, pero no impide sobrescribirlo utilizando override. La clase base puede llamar al método internamente y ejecutar la versión correspondiente de cada máquina.
+
+
 
 b) ¿Qué ocurre ahora con una máquina cuyo tiempo de ciclo es 0? Compáralo con la Etapa 6.
 
-[Inserta aquí tu respuesta]
-a aquí tu respuesta]
+Porque la palabra private impide acceder directamente al método, pero no impide sobrescribirlo utilizando override. La clase base puede llamar al método internamente y ejecutar la versión correspondiente de cada máquina.
+
+
 c) ¿Por qué la línea ignoró el "atajo" del torno, pero la llamada directa no? ¿Cómo corregiste el diseño?
 
-[Inserta aquí tu respuesta]
+Porque la llamada directa utilizaba el método procesar() creado en la clase Torno, mientras que la línea ejecutaba el método de la clase base mediante un apuntador Maquina*. Corregí el diseño eliminando el método procesar() de Torno y dejando que únicamente la clase base controle el procesamiento, el registro de piezas y el tiempo trabajado.
 
 **3.8 Etapa 8. Herencia mal usada**
 
