@@ -12,6 +12,7 @@ Maquina::Maquina(const std::string& nombre) {
     tiempoTrabajadoSeg = 0;
 }
 
+
 void Maquina::registrarPieza() {
     piezasProcesadas++;
 }

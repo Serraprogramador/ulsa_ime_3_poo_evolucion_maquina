@@ -18,10 +18,7 @@ int main() {
 
     linea.imprimirReporte();
 
-    printf("\n--- Objetos originales ---\n");
-
-    torno.mostrarEstado();
-    fresadora.mostrarEstado();
+    
 
     return 0;
 }
