@@ -12,28 +12,18 @@ Maquina::Maquina(const std::string& nombre) {
     tiempoTrabajadoSeg = 0;
 }
 
-
 void Maquina::registrarPieza() {
     piezasProcesadas++;
 }
 
 void Maquina::agregarTiempo(int segundos) {
     if (segundos <= 0) {
-        throw std::invalid_argument("El tiempo debe ser mayor que cero");
+        throw std::invalid_argument(
+            "El tiempo debe ser mayor que cero"
+        );
     }
 
     tiempoTrabajadoSeg += segundos;
-}
-
-void Maquina::procesar() {
-    printf("%s: procesamiento generico\n", nombre.c_str());
-
-    registrarPieza();
-    agregarTiempo(tiempoCicloSeg());
-}
-
-int Maquina::tiempoCicloSeg() const {
-    return 10;
 }
 
 double Maquina::capacidadPorHora() const {

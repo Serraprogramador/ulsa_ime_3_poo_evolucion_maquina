@@ -92,30 +92,29 @@ c) La relación entre `ControlDeLinea` y `Maquina`, ¿es composición o agregaci
 Es agregación porque ControlDeLinea utiliza máquinas que fueron creadas fuera de la clase. Las máquinas pueden existir independientemente y no dependen de ControlDeLinea para su creación o destrucción.
 
 **3.4 Etapa 4. Destructores**
-
 | Momento | Mensajes de destrucción que aparecieron |
 | --- | --- |
-| `delete temporal;` sin destructor virtual | _____ |
-| `delete temporal;` con destructor virtual | _____ |
-| Al terminar `main` (torno y fresadora) | _____ |
+| `delete temporal;` sin destructor virtual | `Destruyendo Maquina` |
+| `delete temporal;` con destructor virtual | `Destruyendo Torno` → `Destruyendo Motor` → `Destruyendo Maquina` |
+| Al terminar `main` (torno y fresadora) | `Destruyendo Maquina` → `Destruyendo Torno` → `Destruyendo Motor` → `Destruyendo Maquina` |
 
 a) ¿Qué advertencia mostró el compilador? ¿Por qué decimos que ya te estaba avisando del problema?
 
-[Inserta aquí tu respuesta]
+El compilador mostró una advertencia indicando que eliminar un objeto de una clase polimórfica mediante un destructor no virtual podía provocar un comportamiento indefinido. Nos estaba avisando que el objeto derivado podía no destruirse correctamente.
 
 b) ¿Por qué el torno de `main` sí se destruyó completo aunque el destructor no fuera virtual? ¿A qué máquina corresponde el primer "Destruyendo Maquina" después de "Fin de main"?
 
-[Inserta aquí tu respuesta]
+Porque el torno de main fue creado directamente como un objeto de tipo Torno y no se eliminó mediante un puntero a Maquina. Al terminar el programa se ejecutaron sus destructores en el orden correspondiente. El primer mensaje "Destruyendo Maquina" después de "Fin de main" corresponde a la Fresadora, que fue creada después del Torno.
 
 **3.5 Etapa 5. La clase abstracta**
 
 a) Copia los mensajes de error y explica con tus palabras qué dice cada uno.
 
-[Inserta aquí tu respuesta]
+El compilador indicó que no se podía crear un objeto de tipo Pulidora porque no tenía implementado el método virtual puro procesar(). También indicó que no se podía crear un objeto de tipo Maquina porque es una clase abstracta y tiene métodos virtuales puros sin implementar.
 
 b) ¿Por qué es mejor este error de compilación que el comportamiento "generico" de antes?
 
-[Inserta aquí tu respuesta]
+Porque el compilador evita que se creen máquinas incompletas o sin un comportamiento definido. Así se detectan los errores antes de ejecutar el programa y se garantiza que cada máquina implemente sus funciones.
 
 **3.6 Etapa 6. El contrato que el compilador no ve**
 
@@ -140,7 +139,7 @@ a) ¿Cómo puede una clase derivada sobrescribir un método que es privado en la
 b) ¿Qué ocurre ahora con una máquina cuyo tiempo de ciclo es 0? Compáralo con la Etapa 6.
 
 [Inserta aquí tu respuesta]
-
+a aquí tu respuesta]
 c) ¿Por qué la línea ignoró el "atajo" del torno, pero la llamada directa no? ¿Cómo corregiste el diseño?
 
 [Inserta aquí tu respuesta]
