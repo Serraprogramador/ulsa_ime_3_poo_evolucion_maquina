@@ -221,7 +221,7 @@ El orden correcto es colocar primero `src/main.cpp` y después `-L. -lplanta`.
 
 ## 5.1 Enlace a mi fork
 
-[Inserta aquí el enlace a tu fork de GitHub.]
+https://github.com/Serraprogramador/ulsa_ime_3_poo_evolucion_maquina.git
 
 # Cierre y reflexión
 
